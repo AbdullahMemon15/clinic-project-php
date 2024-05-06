@@ -1,53 +1,49 @@
 <?php
 require 'config.php';
-// Should return a PDO
-function db_connect()
-{
 
-  try {
-    // try to open database connection using constants set in config.php
-    $connectionString = 'mysql:host=' . DBHOST . ';dbname=' . DBNAME;
-    $user = DBUSER;
-    $pass = DBPASS;
-    // MAKE CONNECTION AND SET UP ERROR STUFF
-    $pdo = new PDO($connectionString, $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $pdo;
-  } catch (PDOException $e) {
-    die($e->getMessage());
-  }
-}
-
-// Handle form submission
-function submit_post()
-{
-  global $pdo;
-
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // GO THROUGH AND BIND EACH VALUE
-    if ( isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['gender'])&&
-    isset($_POST['email']) && isset($_POST['dob']) && isset($_POST['contactNo']) &&
-    isset($_POST['insuranceNo']) && isset($_POST['address']) ) {
-      //PREPARED statement
-      $sql = 'INSERT INTO patient (firstname, lastname, gender, email, dob, contactNo, insuranceNo, address)
-  VALUES (:firstname,:lastname,:gender,:email,:dob, :contactNo, :insuranceNo,:address)';
-      $statement = $pdo->prepare($sql);
-
-      $statement->bindValue(':firstname', $_POST['firstname']);
-      $statement->bindValue(':lastname', $_POST['lastname']);
-      $statement->bindValue(':gender', $_POST['gender']);
-      $statement->bindValue(':email', $_POST['email']);
-      $statement->bindValue(':dob', date('Y-m-d'));
-      $statement->bindValue(':contactNo', $_POST['contactNo']);
-      $statement->bindValue(':insuranceNo', $_POST['insuranceNo']);
-      $statement->bindValue(':address', $_POST['address']);
-
-      $statement->execute();
+function db_connect() {
+    try {
+        $connectionString = 'mysql:host=' . DBHOST . ';dbname=' . DBNAME;
+        $pdo = new PDO($connectionString, DBUSER, DBPASS);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $pdo;
+    } catch (PDOException $e) {
+        error_log("Connection failed: " . $e->getMessage());
+        die("Connection failed: " . $e->getMessage()); // Consider a more user-friendly message in production
     }
-  }
 }
 
-// Get all comments from database and store in $comments
+function submit_post($pdo) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Collect and sanitize input data
+        $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
+        $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
+        $gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_STRING);
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $dob = filter_input(INPUT_POST, 'dob', FILTER_SANITIZE_STRING);
+        $contactNo = filter_input(INPUT_POST, 'contactNo', FILTER_SANITIZE_STRING);
+        $insuranceNo = filter_input(INPUT_POST, 'insuranceNo', FILTER_SANITIZE_NUMBER_INT);
+        $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
+
+        try {
+            $sql = 'INSERT INTO patient (firstname, lastname, gender, email, dob, contactNo, insuranceNo, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$firstname, $lastname, $gender, $email, $dob, $contactNo, $insuranceNo, $address]);
+            if ($stmt->rowCount() > 0) {
+                echo 'Patient added successfully!';
+            } else {
+                echo 'No data inserted.';
+            }
+        } catch (PDOException $e) {
+            error_log("Insert failed: " . $e->getMessage());
+            echo "Insert failed: " . $e->getMessage(); // Consider a more user-friendly message in production
+        }
+    }
+}
+?>
+
+
+<!-- // Get all comments from database and store in $comments
 // function get_posts()
 // {
 //   global $pdo;
@@ -76,4 +72,4 @@ function submit_post()
 //   }
 
 
-// }
+// } -->
