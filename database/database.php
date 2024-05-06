@@ -14,32 +14,33 @@ function db_connect() {
 }
 
 function submit_post($pdo) {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Collect and sanitize input data
-        $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
-        $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
-        $gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_STRING);
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-        $dob = filter_input(INPUT_POST, 'dob', FILTER_SANITIZE_STRING);
-        $contactNo = filter_input(INPUT_POST, 'contactNo', FILTER_SANITIZE_STRING);
-        $insuranceNo = filter_input(INPUT_POST, 'insuranceNo', FILTER_SANITIZE_NUMBER_INT);
-        $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      // Collect and sanitize input data using alternative methods
+      $firstname = htmlspecialchars($_POST['firstname']); // Use htmlspecialchars to prevent XSS
+      $lastname = htmlspecialchars($_POST['lastname']);
+      $gender = htmlspecialchars($_POST['gender']);
+      $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+      $dob = htmlspecialchars($_POST['dob']);
+      $contactNo = htmlspecialchars($_POST['contactNo']);
+      $insuranceNo = filter_input(INPUT_POST, 'insuranceNo', FILTER_SANITIZE_NUMBER_INT);
+      $address = htmlspecialchars($_POST['address']);
 
-        try {
-            $sql = 'INSERT INTO patient (firstname, lastname, gender, email, dob, contactNo, insuranceNo, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$firstname, $lastname, $gender, $email, $dob, $contactNo, $insuranceNo, $address]);
-            if ($stmt->rowCount() > 0) {
-                echo 'Patient added successfully!';
-            } else {
-                echo 'No data inserted.';
-            }
-        } catch (PDOException $e) {
-            error_log("Insert failed: " . $e->getMessage());
-            echo "Insert failed: " . $e->getMessage(); // Consider a more user-friendly message in production
-        }
-    }
+      try {
+          $sql = 'INSERT INTO patient (firstname, lastname, gender, email, dob, contactNo, insuranceNo, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+          $stmt = $pdo->prepare($sql);
+          $stmt->execute([$firstname, $lastname, $gender, $email, $dob, $contactNo, $insuranceNo, $address]);
+          if ($stmt->rowCount() > 0) {
+              echo 'Patient added successfully!';
+          } else {
+              echo 'No data inserted.';
+          }
+      } catch (PDOException $e) {
+          error_log("Insert failed: " . $e->getMessage());
+          echo "Insert failed: " . $e->getMessage(); // Consider a more user-friendly message in production
+      }
+  }
 }
+
 ?>
 
 
