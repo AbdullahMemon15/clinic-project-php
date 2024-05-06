@@ -1,7 +1,8 @@
+
 <?php
-// CITRIX CONFIG - this may be different if you're using your own computer.
-define('DBHOST', 'localhost');
-define('DBNAME', 'registration');
-define('DBUSER', 'root');
-define('DBPASS', '');
- ?>
+// Use environment variables for database configuration
+define('DBHOST', getenv('DBHOST') ?: 'localhost'); // Fallback to 'localhost' if not set
+define('DBNAME', getenv('DBNAME') ?: 'registration');
+define('DBUSER', getenv('DBUSER') ?: 'root');
+define('DBPASS', getenv('DBPASS') ?: '');
+?>

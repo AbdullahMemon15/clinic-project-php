@@ -34,7 +34,9 @@
     <div class="write-comment">
       <h2>Registration</h2>
 
-      <form action="http://localhost/project20230/index.php" method="post">
+      <!-- <form action="http://localhost/project20230/index.php" method="post"> -->
+        <form action="<?php echo ($_SERVER['HTTP_HOST'] == 'localhost' ? 'http://localhost/project20230' : 'https://westwood.herokuapp.com') . '/index.php'; ?>" method="post">
+
 
         <label>
           First Name:
