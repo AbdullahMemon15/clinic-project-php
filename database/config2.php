@@ -1,8 +1,8 @@
-
 <?php
-// Use environment variables for database configuration
-define('DBHOST', getenv('DBHOST') ?: 'localhost'); // Fallback to 'localhost' if not set
-define('DBNAME', getenv('DBNAME') ?: 'registration');
-define('DBUSER', getenv('DBUSER') ?: 'root');
-define('DBPASS', getenv('DBPASS') ?: '');
+$url = parse_url(getenv("JAWSDB_URL"));
+
+define('DBHOST', $url['host']);
+define('DBUSER', $url['user']);
+define('DBPASS', $url['pass']);
+define('DBNAME', substr($url["path"], 1)); // Removing leading '/' from database name
 ?>

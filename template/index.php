@@ -25,9 +25,9 @@
         <div class="navbar-links">
             <ul>
                 <li><a href="home.php">Home</a></li>
-                <li><a href="../project20230/index.php" target="_self">Registration</a></li>
-                <li><a href="../project20230/walk.php" target="_self">Clinic</a></li>
-                <li><a href="../project20230/documentation.php">Documentation</a></li>
+                <li><a href="../index.php" target="_self">Registration</a></li>
+                <li><a href="..//walk.php" target="_self">Clinic</a></li>
+                <li><a href="..//documentation.php">Documentation</a></li>
             </ul>
         </div>
   </nav>
@@ -35,7 +35,7 @@
       <h2>Registration</h2>
 
       <!-- <form action="http://localhost/project20230/index.php" method="post"> -->
-        <form action="<?php echo ($_SERVER['HTTP_HOST'] == 'localhost' ? 'http://localhost/project20230' : 'https://westwood.herokuapp.com') . '/index.php'; ?>" method="post">
+        <form action="<?php echo ($_SERVER['HTTP_HOST'] == 'localhost' ? 'http://localhost/project20230' : 'https://https://westwood-fe70547f7dd1.herokuapp.com') . '/index.php'; ?>" method="post">
 
 
         <label>
