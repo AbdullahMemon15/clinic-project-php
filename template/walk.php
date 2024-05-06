@@ -24,9 +24,9 @@
         <div class="navbar-links">
             <ul>
                 <li><a href="home.php">Home</a></li>
-                <li><a href="../project20230/index.php" target="_self">Registration</a></li>
-                <li><a href="../project20230/walk.php" target="_self">Clinic</a></li>
-                <li><a href="../project20230/documentation.php">Documentation</a></li>
+                <li><a href="index.php" target="_self">Registration</a></li>
+                <li><a href="walk.php" target="_self">Clinic</a></li>
+                <li><a href="documentation.php">Documentation</a></li>
             </ul>
         </div>
 
