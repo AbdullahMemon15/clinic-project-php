@@ -37,7 +37,8 @@
     <div class="write-comment">
         <h2>Walk In Registration</h2>
 
-        <form action="http://localhost/project20230/walk.php" method="post">
+        <form action="<?php echo ($_SERVER['HTTP_HOST'] == 'localhost' ? 'http://localhost/project20230' : 'https://westwood-fe70547f7dd1.herokuapp.com') . '/walk.php'; ?>" method="post">
+
 
 
             <label>
