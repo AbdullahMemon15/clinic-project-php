@@ -5,11 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <script src="script.js" defer></script>
-    
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="newstyle.css"> 
+    <link rel="stylesheet" href="style.css">
     <title>Westwood Clinic</title>
 </head>
 
@@ -27,7 +24,6 @@
                 <li><a href="home.php">Home</a></li>
                 <li><a href="index.php" target="_self">Registration</a></li>
                 <li><a href="walk.php" target="_self">Clinic</a></li>
-                <li><a href="documentation.php">Documentation</a></li>
             </ul>
         </div>
   </nav>
@@ -88,8 +84,8 @@
 
       </form>
     </div>
-    <footer>
-        Copyright &copy; 2022 Westwood Clinic<br>
+    <footer class="footer">
+        Copyright &copy; 2024 Westwood Clinic<br>
         Last Updated on
         <script>
             document.write(document.lastModified);

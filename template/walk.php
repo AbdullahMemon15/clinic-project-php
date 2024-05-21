@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="newstyle.css">
     <title>Westwood Clinic</title>
 </head>
 
@@ -26,13 +24,10 @@
                 <li><a href="home.php">Home</a></li>
                 <li><a href="index.php" target="_self">Registration</a></li>
                 <li><a href="walk.php" target="_self">Clinic</a></li>
-                <li><a href="documentation.php">Documentation</a></li>
             </ul>
         </div>
 
     </nav>
-
-    <!-- <h1>Westwood Clinic</h1> -->
 
     <div class="write-comment">
         <h2>Walk In Registration</h2>
@@ -66,41 +61,43 @@
         </form>
     </div>
     <?php
-    function the_comments()
-    {
-        global $hello;
-        foreach ($hello as $result) {
-            echo "<div class='comment'>";
-            echo "<div class='ID'>Post ID: " . $result["ID"] . "</div>";
-            echo "<div class='date'>Posted on " . $result["date"] . "</div>";
-            echo "<h3> patient Name:  " . $result["fullName"] . "</h3>";
-            echo "<h3> Email:  " . $result["email"] . "</h3>";
-            echo "<div class='mood'>Reason:" . $result["reason"] . "</div>";
-            echo "</div>";
-        }
+function the_commenters()
+{
+    global $patients;
+    echo "</div><div class='commenters'><h2>patients in Line:  </h2>";
+    echo "<ul>";
+    foreach ($patients as $result) {
+        echo "<li> " . $result["fullName"] . "</li>";
     }
-    function the_commenters()
-    {
-        global $patients;
-        echo "</div><div class='commenters'><h2>patients in Line:  </h2>";
-        echo "<ul>";
-        foreach ($patients as $result) {
-            echo "<li> " . $result["fullName"] . "</li>";
-        }
-        echo "</ul>";
-        echo "</div>";
-    }
-    the_comments();
-    the_commenters();
-    ?>
+    echo "</ul>";
+    echo "</div>";
+}
+function the_comments()
+{
+global $hello;
+foreach ($hello as $result) {
+    echo "<div class='comment'>";
+    echo "<div class='comment-header'>";
+    echo "<div class='ID'>Post ID: " . $result["ID"] . "</div>";
+    echo "<div class='date'>Posted on " . $result["date"] . "</div>";
+    echo "</div>";
+    echo "<h3 class='comment-author'>Patient Name: " . $result["fullName"] . "</h3>";
+    echo "<h3 class='comment-email'>Email: " . $result["email"] . "</h3>";
+    echo "<div class='comment-reason'>Reason: " . $result["reason"] . "</div>";
+    echo "</div>";
+}
+}
+the_commenters();     
+the_comments();
+?>
 
-    <footer>
-        Copyright &copy; 2022 Westwood Clinic<br>
-        Last Updated on
-        <script>
-            document.write(document.lastModified);
-        </script>
-    </footer>
+<footer class="footer">
+    Copyright &copy; 2024 Westwood Clinic<br>
+    Last Updated on
+    <script>
+        document.write(document.lastModified);
+    </script>
+</footer>
 </body>
 
 </html>
