@@ -21,9 +21,9 @@
 
         <div class="navbar-links">
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="registration.php" target="_self">Registration</a></li>
-                <li><a href="walk.php" target="_self">Clinic</a></li>
+            <li><a href="index.php" aria-label="Home">Home</a></li>
+                <li><a href="registration.php" target="_self" aria-label="Patient Registration">Patient Registration</a></li>
+                <li><a href="walk.php" target="_self"aria-label="Walk-In Registration">Walk-In Registration</a></li>
             </ul>
         </div>
   </nav>
@@ -39,7 +39,7 @@
           <input type="text" required name="firstname">
         </label>
         <label>
-          last Name:
+          Last Name:
           <input type="text" required name="lastname">
         </label>
         

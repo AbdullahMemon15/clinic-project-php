@@ -21,23 +21,23 @@
 
         <div class="navbar-links">
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="registration.php" target="_self">Registration</a></li>
-                <li><a href="walk.php" target="_self">Clinic</a></li>
+                <li><a href="index.php" aria-label="Home">Home</a></li>
+                <li><a href="registration.php" target="_self" aria-label="Patient Registration">Patient Registration</a></li>
+                <li><a href="walk.php" target="_self"aria-label="Walk-In Registration">Walk-In Registration</a></li>
             </ul>
         </div>
 
     </nav>
 
     <div class="write-comment">
-        <h2>Walk In Registration</h2>
+        <h2>Walk-In Registration</h2>
 
         <form action="<?php echo ($_SERVER['HTTP_HOST'] == 'localhost' ? 'http://localhost/project20230' : 'https://westwood-fe70547f7dd1.herokuapp.com') . '/walk.php'; ?>" method="post">
 
 
 
             <label>
-                fullName
+                Full Name
                 <input type="text" name="fullName" required>
             </label>
 
@@ -56,7 +56,7 @@
                     <option value="other">other</option>
                 </select>
             </label>
-            <button type="submit" name="button">Join the Waitlist</button>
+            <button type="submit" name="button">Join the Wait list</button>
 
         </form>
     </div>
