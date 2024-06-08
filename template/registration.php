@@ -35,16 +35,16 @@
 
 
         <label>
-          First Name:
+          First Name
           <input type="text" required name="firstname">
         </label>
         <label>
-          Last Name:
+          Last Name
           <input type="text" required name="lastname">
         </label>
         
         <label>
-          Gender:
+          Gender
           <select name="gender" required>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -54,7 +54,7 @@
           </select>
 
           <label>
-            Email Address:
+            Email Address
             <input type="email" required name="email">
           </label>
           <label>

@@ -42,7 +42,7 @@
             </label>
 
             <label>
-                Email Address:
+                Email Address
                 <input type="email" name="email" required>
             </label>
 
